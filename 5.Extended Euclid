@@ -1,0 +1,37 @@
+Extended Euclid 
+
+#include <stdio.h>
+struct Triple{
+    int g;
+    int c1;
+    int c2;
+};
+typedef struct Triple Triple;
+
+void printTriple(Triple t){
+    printf("g=%d, c1=%d, c2=%d\n", t.g, t.c1, t.c2);
+}
+
+Triple extGCD(int a, int b){
+    Triple ans; //a record of strct Triple
+    
+    if(a==0){
+        ans.g = b;
+        ans.c1 = 0;
+        ans.c2 = 1;
+        
+        printTriple(ans);
+        return ans;
+    }
+    else{
+        Triple temp = extGCD(b%a, a);
+        
+        ans.g = temp.g;
+        ans.c1 = temp.c1*(b/a) + temp.c2;
+        ans.c2 = temp.c1;
+    }
+}
+
+int main(){
+    extGCD(242424, 363636);
+}
